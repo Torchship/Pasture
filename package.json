@@ -65,6 +65,8 @@
     "@types/node": "^20.8.9",
     "@types/react-resizable": "^3.0.6",
     "concurrently": "^8.2.2",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
     "nodemon": "^3.0.1",
     "prettier": "^3.0.3",
     "ts-node": "^10.9.1"
