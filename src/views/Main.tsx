@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Responsive, WidthProvider } from 'react-grid-layout';
-import ZoomableRoomView, { Room } from '../MapView';
+import ZoomableRoomView, { Room, SelectedElement } from '../MapView';
 import { Header } from '../components/Header';
 import { Container } from '../components/Container';
 
@@ -8,7 +8,12 @@ const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const Main: React.FC = () => {
     const [containerHeight, setContainerHeight] = useState<number | null>(null);
+    const [selectedElement, setSelectedElement] = useState<SelectedElement | null>(null);
     const containerRef = useRef<HTMLDivElement>(null);
+
+    const handleElementSelected = (selectedElement: SelectedElement) => {
+      setSelectedElement(selectedElement);
+    };
 
     useEffect(() => {
         if (containerRef.current) {
@@ -18,9 +23,9 @@ const Main: React.FC = () => {
     const height = (containerHeight || 0) / 12;
 
     const rooms: Room[] = [
-    { x: 0, y: 0, z: 0, name: 'Room A', objid: 1, exits: [2] },
-    { x: 1, y: 0, z: 0, name: 'Room B', objid: 2, exits: [1, 3] },
-    { x: 0, y: 1, z: 0, name: 'Room C', objid: 3, exits: [2] },
+    { x: 0, y: 0, z: 0, name: 'Room A', id: 1, exits: [{id: 4, name: "East", source: 1, dest: 2, aliases: ['E']}] },
+    { x: 1, y: 0, z: 0, name: 'Room B', id: 2, exits: [{id: 5, name: "West", source: 2, dest: 1, aliases: ['W']}, {id: 6, name: "Southwest", source: 2, dest: 3, aliases: ['SW']}] },
+    { x: 0, y: 1, z: 0, name: 'Room C', id: 3, exits: [{id: 6, name: "Northeast", source: 3, dest: 2, aliases: ['NE']}] },
   ];
   return (
     <div ref={containerRef} style={{ height: '100vh', width: '100vw' }}>
@@ -45,11 +50,11 @@ const Main: React.FC = () => {
         <div key="map">
             <Header title="MAP EDITOR" />
             <Container>
-              <ZoomableRoomView rooms={rooms} />
+              <ZoomableRoomView rooms={rooms} onSelected={handleElementSelected} />
             </Container>
         </div>
         <div key="properties">
-          <Header title="PROPERTIES" />
+          <Header title="PROPERTIES" subtitle={`${selectedElement?.id || '<None Selected>'}`}/>
         </div>
         <div key="terminal">
           <Header title="TERMINAL" />
