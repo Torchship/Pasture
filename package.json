@@ -37,7 +37,8 @@
     "server": "nodemon",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,md}\""
   },
   "eslintConfig": {
     "extends": [
@@ -65,6 +66,7 @@
     "@types/react-resizable": "^3.0.6",
     "concurrently": "^8.2.2",
     "nodemon": "^3.0.1",
+    "prettier": "^3.0.3",
     "ts-node": "^10.9.1"
   }
 }

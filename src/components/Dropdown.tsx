@@ -10,7 +10,13 @@ interface DropdownProps {
   className?: string;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ label, options, onSelect, className, style }) => {
+const Dropdown: React.FC<DropdownProps> = ({
+  label,
+  options,
+  onSelect,
+  className,
+  style,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -19,11 +25,11 @@ const Dropdown: React.FC<DropdownProps> = ({ label, options, onSelect, className
 
   return (
     <div className={`dropdown-container ${className}`} style={style}>
-      <Button label={label} onClick={toggleDropdown}/>
+      <Button label={label} onClick={toggleDropdown} />
       {isOpen && (
         <ul className="dropdown-menu">
           {options.map((option, index) => (
-            <li 
+            <li
               key={index}
               onClick={() => {
                 onSelect(option);
@@ -37,6 +43,6 @@ const Dropdown: React.FC<DropdownProps> = ({ label, options, onSelect, className
       )}
     </div>
   );
-}
+};
 
 export default Dropdown;

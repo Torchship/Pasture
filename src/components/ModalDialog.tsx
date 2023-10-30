@@ -8,7 +8,12 @@ interface ModalProps {
   children: React.ReactNode;
 }
 
-const ModalDialog: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
+const ModalDialog: React.FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  title,
+  children,
+}) => {
   if (!isOpen) return null;
 
   return (
@@ -18,12 +23,10 @@ const ModalDialog: React.FC<ModalProps> = ({ isOpen, onClose, title, children })
           <h2>{title}</h2>
           <button onClick={onClose}>Close</button>
         </div>
-        <div className="modal-content">
-          {children}
-        </div>
+        <div className="modal-content">{children}</div>
       </div>
     </div>
   );
-}
+};
 
 export default ModalDialog;
