@@ -93,6 +93,7 @@ const MapView: React.FC<MapViewProps> = ({ rooms, onSelected }) => {
   const svgRef = useRef<SVGSVGElement | null>(null);
 
   const selectedColor = "#ff0000";  // Color to indicate a selected room or line
+  const maxY = Math.max(...rooms.map(room => room.y));
 
   const handleRoomClick = (room: Room) => {
     setSelectedElement({
@@ -140,9 +141,9 @@ const MapView: React.FC<MapViewProps> = ({ rooms, onSelected }) => {
             if (!drawnConnections.has(connectionId)) {
               container.append('line')
                 .attr('x1', room.x * 200 + 50) // Center of the room
-                .attr('y1', room.y * 200 + 50) // Center of the room
+                .attr('y1', (maxY - room.y) * 200 + 50) // Center of the room
                 .attr('x2', targetRoom.x * 200 + 50) // Center of the target room
-                .attr('y2', targetRoom.y * 200 + 50) // Center of the target room
+                .attr('y2', (maxY - targetRoom.y) * 200 + 50) // Center of the target room
                 .attr('stroke', '#576C6E')
                 .attr('stroke-width', 2)
                 .on('click', function() {
@@ -162,7 +163,7 @@ const MapView: React.FC<MapViewProps> = ({ rooms, onSelected }) => {
      rooms.forEach(room => {
         container.append('rect')
           .attr('x', room.x * 200)
-          .attr('y', room.y * 200)
+          .attr('y', (maxY - room.y) * 200)
           .attr('width', 100)
           .attr('height', 100)
           .attr('fill', 'lightgray')
@@ -176,7 +177,7 @@ const MapView: React.FC<MapViewProps> = ({ rooms, onSelected }) => {
   
         container.append('text')
           .attr('x', room.x * 200 + 50)
-          .attr('y', room.y * 200 + 50)
+          .attr('y', (maxY - room.y) * 200 + 50)
           .attr('dy', '0.35em')
           .attr('text-anchor', 'middle')
           .text(`[${room.x}, ${room.y}]`);
@@ -188,7 +189,7 @@ const MapView: React.FC<MapViewProps> = ({ rooms, onSelected }) => {
           const position = calculateCorner(stringToCardinalDirection(exit.name));
           container.append('rect')
             .attr('x', position.x + (room.x * 200) - 10)
-            .attr('y', position.y + (room.y * 200) - 10)
+            .attr('y', position.y + ((maxY - room.y) * 200) - 10)
             .attr('width', 20)
             .attr('height', 20)
             .attr('fill', 'lightgray')
@@ -196,9 +197,10 @@ const MapView: React.FC<MapViewProps> = ({ rooms, onSelected }) => {
 
           container.append('text')
             .attr('x', position.x + (room.x * 200))
-            .attr('y', position.y + (room.y * 200))
+            .attr('y', position.y + ((maxY - room.y) * 200))
             .attr('dy', '0.35em')
             .attr('text-anchor', 'middle')
+            .style("font-size", "12px")
             .text(`${exit.aliases?.[0]}`);
         });
       });

@@ -26,8 +26,8 @@ const Main: React.FC = () => {
 
     const rooms: Room[] = [
     { x: 0, y: 0, z: 0, name: 'Room A', id: 1, exits: [{id: 4, name: "East", source: 1, dest: 2, aliases: ['E']}] },
-    { x: 1, y: 0, z: 0, name: 'Room B', id: 2, exits: [{id: 5, name: "West", source: 2, dest: 1, aliases: ['W']}, {id: 6, name: "Southwest", source: 2, dest: 3, aliases: ['SW']}] },
-    { x: 0, y: 1, z: 0, name: 'Room C', id: 3, exits: [{id: 6, name: "Northeast", source: 3, dest: 2, aliases: ['NE']}] },
+    { x: 1, y: 0, z: 0, name: 'Room B', id: 2, exits: [{id: 5, name: "West", source: 2, dest: 1, aliases: ['W']}, {id: 6, name: "Northwest", source: 2, dest: 3, aliases: ['NW']}] },
+    { x: 0, y: 1, z: 0, name: 'Room C', id: 3, exits: [{id: 6, name: "Southeast", source: 3, dest: 2, aliases: ['SE']}] },
   ];
   return (
     <div ref={containerRef} style={{ height: '100vh', width: '100vw' }}>
