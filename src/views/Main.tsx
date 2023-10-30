@@ -3,7 +3,6 @@ import { Responsive, WidthProvider } from 'react-grid-layout';
 import ZoomableRoomView, { Room, SelectedElement } from '../MapView';
 import { Header } from '../components/Header';
 import { Container } from '../components/Container';
-import Button from '../components/Button';
 import Dropdown from '../components/Dropdown';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
@@ -64,7 +63,7 @@ const Main: React.FC = () => {
         </div>
         <div key="properties">
           <Header title="PROPERTIES" subtitle={`${selectedElement?.id || '<None Selected>'}`}/>
-          <Button label="Test"/>
+          {/* <Button label="Test"/> */}
         </div>
         <div key="terminal">
           <Header title="TERMINAL" />
