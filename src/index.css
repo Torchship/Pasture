@@ -1,0 +1,20 @@
+body, html {
+  font-family: 'Fira Mono', monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background-color: #0D1015;
+  
+  /* Create the dot pattern */
+  background-image: radial-gradient(circle, #292B2B 0.5px, transparent 1px),
+  radial-gradient(circle, #292B2B 0.5px, transparent 1px);
+
+  /* Size of the pattern (distance between dots) */
+  background-size: 25px 25px;
+}
