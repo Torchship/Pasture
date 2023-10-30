@@ -9,7 +9,7 @@ body, html {
 }
 
 body {
-  background-color: #0D1015;
+  background-color: var(--dark-secondary-color);
   
   /* Create the dot pattern */
   background-image: radial-gradient(circle, #292B2B 0.5px, transparent 1px),

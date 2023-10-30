@@ -1,0 +1,18 @@
+.button {
+  background-color: var(--dark-secondary-color);
+  color: var(--primary-color);
+  border: solid 1px var(--secondary-color);
+  height: 1.4em; /* height should be the same as width to make it square */
+  font-size: 14px;
+  border-radius: 1px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s;
+  padding-left: 2em;
+  padding-right: 2em;
+
+  /* Optional: Basic hover effect */
+  &:hover {
+    background-color: var(--light-secondary-color);
+  }
+}

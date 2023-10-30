@@ -2,7 +2,7 @@
     width: calc(100%, -4em);
     height: 90%;
     margin: 2em;
-    border: solid 2px #576C6E;
+    border: solid 2px var(--light-secondary-color);
     border-radius: 1px;
-    background-color: #0D1015;
+    background-color: var(--dark-secondary-color);
 }
