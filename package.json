@@ -8,11 +8,11 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
     "@types/leaflet": "^1.9.7",
-    "@types/node": "^16.18.59",
     "@types/react": "^18.2.33",
     "@types/react-dom": "^18.2.14",
     "@types/react-grid-layout": "^1.3.4",
     "d3": "^7.8.5",
+    "express": "^4.18.2",
     "leaflet": "^1.9.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -27,7 +27,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "client": "react-scripts start",
+    "server": "nodemon",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -52,6 +54,11 @@
   },
   "devDependencies": {
     "@types/d3": "^7.4.2",
-    "@types/react-resizable": "^3.0.6"
+    "@types/express": "^4.17.20",
+    "@types/node": "^20.8.9",
+    "@types/react-resizable": "^3.0.6",
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.0.1",
+    "ts-node": "^10.9.1"
   }
 }
