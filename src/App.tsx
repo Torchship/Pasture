@@ -2,23 +2,18 @@ import React, { useState, useRef, useEffect } from 'react';
 import './App.css';
 import { useSocket } from './SocketContext';
 import { Responsive, WidthProvider } from 'react-grid-layout';
-import ZoomableRoomView, { Room, SelectedElement } from './MapView';
+import InteractiveMap from './components/Map/InteractiveMap';
 import { Header } from './components/Header';
 import { Container } from './components/Container';
 import Dropdown from './components/Dropdown';
+import { Room } from './data/Map';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const App: React.FC = () => {
   const socket = useSocket();
   const [containerHeight, setContainerHeight] = useState<number | null>(null);
-  const [selectedElement, setSelectedElement] =
-    useState<SelectedElement | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-
-  const handleElementSelected = (selectedElement: SelectedElement) => {
-    setSelectedElement(selectedElement);
-  };
 
   useEffect(() => {
     socket.on('message', (msg: string) => {
@@ -99,10 +94,7 @@ const App: React.FC = () => {
           <div key="map">
             <Header title="MAP EDITOR" />
             <Container>
-              <ZoomableRoomView
-                rooms={rooms}
-                onSelected={handleElementSelected}
-              />
+              <InteractiveMap rooms={rooms} />
             </Container>
             <Dropdown
               style={{ position: 'absolute', right: '3em', top: '4em' }}
@@ -114,9 +106,8 @@ const App: React.FC = () => {
           <div key="properties">
             <Header
               title="PROPERTIES"
-              subtitle={`${selectedElement?.id || '<None Selected>'}`}
+              // subtitle={`${selectedElement?.id || '<None Selected>'}`}
             />
-            {/* <Button label="Test"/> */}
           </div>
           <div key="terminal">
             <Header title="TERMINAL" />
