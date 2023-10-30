@@ -91,9 +91,9 @@ const App: React.FC = () => {
             ],
           }}
         >
-          <div key="map">
+          <div key="map" style={{display: 'flex', flexDirection: 'column'}}>
             <Header title="MAP EDITOR" />
-            <Container>
+            <Container >
               <InteractiveMap rooms={rooms} />
             </Container>
             <Dropdown
