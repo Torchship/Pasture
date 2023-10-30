@@ -72,6 +72,7 @@ const App: React.FC = () => {
   return (
     <div className="mainDiv">
       <div ref={containerRef} style={{ height: '100vh', width: '100vw' }}>
+        <Header title="PASTURES" subtitle="VERSION 0.1" style={{marginBottom: '2em', marginTop: '1em'}}/>
         <ResponsiveGridLayout
           className="layout"
           breakpoints={{ lg: 1200 }}
