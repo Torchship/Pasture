@@ -1,12 +1,12 @@
 import React from 'react';
 import './Button.css';
 
-interface SquareButtonProps {
+interface ButtonProps {
   label: string;
   onClick?: () => void;
 }
 
-const Button: React.FC<SquareButtonProps> = ({ label, onClick }) => {
+const Button: React.FC<ButtonProps> = ({ label, onClick }) => {
   return (
     <button className="button" onClick={onClick}>
       {label}

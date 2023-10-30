@@ -4,6 +4,7 @@ import ZoomableRoomView, { Room, SelectedElement } from '../MapView';
 import { Header } from '../components/Header';
 import { Container } from '../components/Container';
 import Button from '../components/Button';
+import Dropdown from '../components/Dropdown';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -44,7 +45,8 @@ const Main: React.FC = () => {
             // { i: 'green', x: 0, y: 1, w: 12, h: 30 / rowHeightInVh },
             {i: 'map', x: 0, y: 0, w: 9, h: 8},
             {i: 'properties', x: 9, y: 0, w: 3, h: 8},
-            {i: 'terminal', x: 0, y: 8, w: 12, h: 4}
+            {i: 'terminal', x: 0, y: 8, w: 9, h: 4},
+            {i: 'areas', x: 9, y: 8, w: 3, h: 4}
           ]
         }}
       >
@@ -53,6 +55,12 @@ const Main: React.FC = () => {
             <Container>
               <ZoomableRoomView rooms={rooms} onSelected={handleElementSelected} />
             </Container>
+            <Dropdown 
+              style={{position: 'absolute', right: '3em', top: '4em'}}
+              label="Dropdown" 
+              options={['Sample 1', 'Sample 2', 'Sample 3']} 
+              onSelect={() => {}}
+            />
         </div>
         <div key="properties">
           <Header title="PROPERTIES" subtitle={`${selectedElement?.id || '<None Selected>'}`}/>
@@ -60,6 +68,9 @@ const Main: React.FC = () => {
         </div>
         <div key="terminal">
           <Header title="TERMINAL" />
+        </div>
+        <div key="areas">
+          <Header title="AREAS" />
         </div>
       </ResponsiveGridLayout>
     </div>

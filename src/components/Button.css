@@ -10,6 +10,7 @@
   transition: background-color 0.3s;
   padding-left: 2em;
   padding-right: 2em;
+  caret-color: transparent;
 
   /* Optional: Basic hover effect */
   &:hover {
