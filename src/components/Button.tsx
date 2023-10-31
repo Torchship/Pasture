@@ -11,7 +11,7 @@ interface ButtonProps {
 
 const Button: React.FC<ButtonProps> = ({ label, onClick, children, style, className }) => {
   return (
-    <button onClick={onClick} className={`button ${className}`} style={style}>
+    <button onClick={onClick} className={`button noDrag ${className}`} style={style}>
       {label || children}
     </button>
   );

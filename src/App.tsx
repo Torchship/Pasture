@@ -10,12 +10,15 @@ import { Room } from './data/Map';
 import ModalDialog from './components/ModalDialog';
 import Table from './components/Table';
 import Button from './components/Button';
+import AreasPanel from './views/AreasPanel';
+import PropertiesPanel from './views/PropertiesPanel';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const App: React.FC = () => {
   const socket = useSocket();
   const [containerHeight, setContainerHeight] = useState<number | null>(null);
+  const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -74,7 +77,7 @@ const App: React.FC = () => {
 
   return (
     <div className="mainDiv">
-      <ModalDialog isOpen={true} title="Test Modal Dialog">
+      <ModalDialog isOpen={dialogOpen} onClose={() => setDialogOpen(false)} title="Test Modal Dialog">
         <Table>
           <tr>
             <td>Test</td>
@@ -96,6 +99,7 @@ const App: React.FC = () => {
       <div ref={containerRef} style={{ height: '100vh', width: '100vw' }}>
         <Header title="PASTURES" subtitle="VERSION 0.1" style={{marginBottom: '2em', marginTop: '1em'}}/>
         <ResponsiveGridLayout
+          draggableCancel=".noDrag"
           className="layout"
           breakpoints={{ lg: 1200 }}
           cols={{ lg: 12 }}
@@ -122,17 +126,14 @@ const App: React.FC = () => {
               onSelect={() => {}}
             />
           </div>
-          <div key="properties">
-            <Header
-              title="PROPERTIES"
-              // subtitle={`${selectedElement?.id || '<None Selected>'}`}
-            />
+          <div key="properties" style={{display: 'flex', flexDirection: 'column'}}>
+            <PropertiesPanel/>
           </div>
-          <div key="terminal">
+          <div key="terminal" style={{display: 'flex', flexDirection: 'column'}}>
             <Header title="TERMINAL" />
           </div>
-          <div key="areas">
-            <Header title="AREAS" />
+          <div key="areas" style={{display: 'flex', flexDirection: 'column'}}>
+            <AreasPanel />
           </div>
         </ResponsiveGridLayout>
       </div>

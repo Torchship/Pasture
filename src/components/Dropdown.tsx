@@ -24,10 +24,10 @@ const Dropdown: React.FC<DropdownProps> = ({
   };
 
   return (
-    <div className={`dropdown-container ${className}`} style={style}>
+    <div className={`dropdown-container noDrag ${className}`} style={style}>
       <Button label={label} onClick={toggleDropdown} />
       {isOpen && (
-        <ul className="dropdown-menu">
+        <ul className="dropdown-menu noDrag">
           {options.map((option, index) => (
             <li
               key={index}

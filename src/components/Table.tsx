@@ -9,7 +9,7 @@ interface TableProps {
 
 const Table: React.FC<TableProps> = ({ children, style, className }) => {
   return (
-    <div className="table-container">
+    <div className="table-container noDrag">
       <table className={`table ${className}`} style={style}>
         <tr>
           <th>Test</th>
