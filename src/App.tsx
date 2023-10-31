@@ -8,6 +8,8 @@ import { Container } from './components/Container';
 import Dropdown from './components/Dropdown';
 import { Room } from './data/Map';
 import ModalDialog from './components/ModalDialog';
+import Table from './components/Table';
+import Button from './components/Button';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -72,7 +74,25 @@ const App: React.FC = () => {
 
   return (
     <div className="mainDiv">
-      <ModalDialog isOpen={true} title="Test Modal Dialog" />
+      <ModalDialog isOpen={true} title="Test Modal Dialog">
+        <Table>
+          <tr>
+            <td>Test</td>
+            <td>Test2</td>
+            <td><Button label="Test3" style={{width: "100%"}}/></td>
+          </tr>
+          <tr>
+            <td>Test</td>
+            <td>Test2</td>
+            <td><Button label="Test3" style={{width: "100%"}}/></td>
+          </tr>
+          <tr>
+            <td>Test</td>
+            <td>Test2</td>
+            <td><Button label="Test3" style={{width: "100%"}}/></td>
+          </tr>
+        </Table>
+      </ModalDialog>
       <div ref={containerRef} style={{ height: '100vh', width: '100vw' }}>
         <Header title="PASTURES" subtitle="VERSION 0.1" style={{marginBottom: '2em', marginTop: '1em'}}/>
         <ResponsiveGridLayout
