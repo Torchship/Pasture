@@ -7,6 +7,7 @@ import { Header } from './components/Header';
 import { Container } from './components/Container';
 import Dropdown from './components/Dropdown';
 import { Room } from './data/Map';
+import ModalDialog from './components/ModalDialog';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -71,6 +72,7 @@ const App: React.FC = () => {
 
   return (
     <div className="mainDiv">
+      <ModalDialog isOpen={false} />
       <div ref={containerRef} style={{ height: '100vh', width: '100vw' }}>
         <Header title="PASTURES" subtitle="VERSION 0.1" style={{marginBottom: '2em', marginTop: '1em'}}/>
         <ResponsiveGridLayout
@@ -81,10 +83,6 @@ const App: React.FC = () => {
           rowHeight={height}
           layouts={{
             lg: [
-              // { i: 'toolbar', x: 0, y: 0, w: 12, h: toolbarHeightInVh / rowHeightInVh },
-              // { i: 'red', x: 0, y: 2, w: 7, h: 1 },
-              // { i: 'yellow', x: 7, y: 2, w: 5, h: 1 },
-              // { i: 'green', x: 0, y: 1, w: 12, h: 30 / rowHeightInVh },
               { i: 'map', x: 0, y: 0, w: 9, h: 8 },
               { i: 'properties', x: 9, y: 0, w: 3, h: 8 },
               { i: 'terminal', x: 0, y: 8, w: 9, h: 4 },

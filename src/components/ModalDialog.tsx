@@ -1,11 +1,11 @@
 import React from 'react';
-import './Modal.css';
+import './ModalDialog.css';
 
 interface ModalProps {
   isOpen: boolean;
-  onClose: () => void;
-  title: string;
-  children: React.ReactNode;
+  onClose?: () => void;
+  title?: string;
+  children?: React.ReactNode;
 }
 
 const ModalDialog: React.FC<ModalProps> = ({
@@ -18,12 +18,15 @@ const ModalDialog: React.FC<ModalProps> = ({
 
   return (
     <div className="modal-overlay">
-      <div className="modal">
-        <div className="modal-header">
-          <h2>{title}</h2>
-          <button onClick={onClose}>Close</button>
+      <div className="modal-background">
+        <div className="modal">
+          <div></div> {/* This is needed to utilize its pseudo-elements for the bottom corners */}
+          <div className="modal-header">
+            <h2>{title}</h2>
+            <button onClick={onClose}>Close</button>
+          </div>
+          <div className="modal-content">{children}</div>
         </div>
-        <div className="modal-content">{children}</div>
       </div>
     </div>
   );

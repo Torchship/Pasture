@@ -8,14 +8,41 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 9997; /* This will ensure the overlay is above most other elements. */
+}
+
+.modal-background, .modal {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 1em) 0,
+    100% 1em,
+    100% 100%, 
+    1em 100%,
+    0 calc(100% - 1em)
+  );
+}
+
+.modal-background {
+  position: fixed;
+  top: 20%; 
+  left: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  max-width: 500px;
+  background: var(--light-secondary-color);
+  z-index: 9998; /* This will ensure the modal is above the overlay and most other elements. */
+  
 }
 
 .modal {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  width: 60%;
-  max-width: 500px;
+  border-top: 2px solid var(--light-secondary-color);
+  border-bottom: 2px solid var(--light-secondary-color);
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  background: var(--dark-secondary-color);
+  z-index: 9999; /* This will ensure the modal is above the overlay and most other elements. */
 }
 
 .modal-header {
