@@ -3,7 +3,7 @@
   color: var(--primary-color);
   border: solid 1px var(--secondary-color);
   height: 1.4em; /* height should be the same as width to make it square */
-  font-size: 14px;
+  font-size: 16px;
   border-radius: 1px;
   cursor: pointer;
   outline: none;
@@ -11,6 +11,7 @@
   margin: 0;
   padding: 0;
   caret-color: transparent;
+  font-family: 'United Sans Rg Lt', sans-serif;
 
   /* Optional: Basic hover effect */
   &:hover {

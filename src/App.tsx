@@ -72,7 +72,7 @@ const App: React.FC = () => {
 
   return (
     <div className="mainDiv">
-      <ModalDialog isOpen={false} />
+      <ModalDialog isOpen={true} title="Test Modal Dialog" />
       <div ref={containerRef} style={{ height: '100vh', width: '100vw' }}>
         <Header title="PASTURES" subtitle="VERSION 0.1" style={{marginBottom: '2em', marginTop: '1em'}}/>
         <ResponsiveGridLayout

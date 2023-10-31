@@ -1,5 +1,6 @@
 import React from 'react';
 import './ModalDialog.css';
+import Button from './Button';
 
 interface ModalProps {
   isOpen: boolean;
@@ -22,10 +23,14 @@ const ModalDialog: React.FC<ModalProps> = ({
         <div className="modal">
           <div></div> {/* This is needed to utilize its pseudo-elements for the bottom corners */}
           <div className="modal-header">
-            <h2>{title}</h2>
-            <button onClick={onClose}>Close</button>
+            <h1>{title}</h1>
           </div>
-          <div className="modal-content">{children}</div>
+          <div className="modal-content">
+            {children}
+          </div>
+          <div className="modal-footer">
+            <Button label="Close"/>
+          </div>
         </div>
       </div>
     </div>
