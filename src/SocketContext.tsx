@@ -1,21 +1,16 @@
-import React, { createContext, useContext, useEffect } from 'react';
+import React, { createContext, useContext } from 'react';
 import { io, Socket } from 'socket.io-client';
+import { ClientToServerEvents, ServerToClientEvents } from './data/SocketEvents';
 
-const SocketContext = createContext<Socket | undefined>(undefined);
+const SocketContext = createContext<Socket<ServerToClientEvents, ClientToServerEvents> | undefined>(undefined);
 
 interface SocketProviderProps {
   children?: React.ReactNode;
 }
 
 export const SocketProvider: React.FC<SocketProviderProps> = ({ children }) => {
-  const socket = io('http://localhost:3001');
-
-  useEffect(() => {
-    return () => {
-      socket.disconnect();
-    };
-  }, [socket]);
-
+  const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io('http://localhost:3001');
+  socket.emit('hello');
   return (
     <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>
   );

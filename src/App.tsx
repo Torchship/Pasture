@@ -2,11 +2,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import './App.css';
 import { useSocket } from './SocketContext';
 import { Responsive, WidthProvider } from 'react-grid-layout';
-import InteractiveMap from './components/map/InteractiveMap';
+// import InteractiveMap from './components/map/InteractiveMap';
 import { Header } from './elements/Header';
 import { Container } from './elements/Container';
 import Dropdown from './elements/Dropdown';
-import { Room } from './data/Map';
+// import { Room } from './data/Map';
 import ModalDialog from './elements/ModalDialog';
 import Table from './elements/Table';
 import Button from './elements/Button';
@@ -14,7 +14,7 @@ import AreasPanel from './views/AreasPanel';
 import PropertiesPanel from './views/PropertiesPanel';
 import TerminalPanel from './views/TerminalPanel';
 import LoginDialog from './components/dialogs/LoginDialog';
-import MapContext from './contexts/MapContext';
+// import MapContext from './contexts/MapContext';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -27,21 +27,25 @@ const App: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handleLogin = (username: string, password: string) => {
-    socket.emit(`connect ${username} ${password}`);
-    setLoginOpen(false);
+    console.log(socket);
+    socket.emit('login', username, password, (msg) => {
+      console.log(msg);
+      setLoginOpen(false);
+    });
+    
   };
 
   useEffect(() => {
-    socket.on('message', (msg: string) => {
+    socket.on('raw', (msg: string) => {
       console.log(msg);
       setMessages([...messages, msg]);
     });
 
-    return () => {
-      // cleanup listeners on unmount
-      socket.off('message');
-    };
-  }, [socket]);
+    // return () => {
+    //   // cleanup listeners on unmount
+    //   socket.off('raw');
+    // };
+  }, [socket, messages]);
 
   useEffect(() => {
     if (containerRef.current) {
@@ -93,9 +97,9 @@ const App: React.FC = () => {
           <div key="map" style={{display: 'flex', flexDirection: 'column'}}>
             <Header title="MAP EDITOR" />
             <Container >
-              <MapContext>
+              {/* <MapContext>
                 <InteractiveMap />
-              </MapContext>
+              </MapContext> */}
             </Container>
             <Dropdown
               style={{ position: 'absolute', right: '3em', top: '4em' }}
