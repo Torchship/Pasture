@@ -1,14 +1,18 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useContext } from 'react';
 import * as d3 from 'd3';
 import { Room } from '../../data/Map';
 import RoomRenderer from './RoomRenderer';
 import ConnectionRenderer from './ConnectionRenderer';
+import MapContext from '../../contexts/MapContext';
 
-interface InteractiveMapProps {
-  rooms: Room[];
-}
+const InteractiveMap: React.FC = () => {
+    const context = useContext(MapContext);
 
-const InteractiveMap: React.FC<InteractiveMapProps> = ({ rooms }) => {
+    if (!context) {
+      throw new Error("Component must be wrapped within a MapProvider");
+    }
+    
+    const { rooms, setRooms } = context;
     const svgRef = useRef<SVGSVGElement | null>(null);
     const [selectedRoom, setSelectedRoom] = useState<Room>();
 

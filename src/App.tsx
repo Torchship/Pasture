@@ -14,6 +14,7 @@ import AreasPanel from './views/AreasPanel';
 import PropertiesPanel from './views/PropertiesPanel';
 import TerminalPanel from './views/TerminalPanel';
 import LoginDialog from './components/dialogs/LoginDialog';
+import MapContext from './contexts/MapContext';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -49,39 +50,7 @@ const App: React.FC = () => {
   }, []);
 
   const height = (containerHeight || 0) / 12;
-
-  const rooms: Room[] = [
-    {
-      x: 0,
-      y: 0,
-      z: 0,
-      name: 'Room A',
-      id: 1,
-      exits: [{ id: 4, name: 'East', source: 1, dest: 2, aliases: ['E'] }],
-    },
-    {
-      x: 1,
-      y: 0,
-      z: 0,
-      name: 'Room B',
-      id: 2,
-      exits: [
-        { id: 5, name: 'West', source: 2, dest: 1, aliases: ['W'] },
-        { id: 6, name: 'Northwest', source: 2, dest: 3, aliases: ['NW'] },
-      ],
-    },
-    {
-      x: 0,
-      y: 1,
-      z: 0,
-      name: 'Room C',
-      id: 3,
-      exits: [
-        { id: 6, name: 'Southeast', source: 3, dest: 2, aliases: ['SE'] },
-      ],
-    },
-  ];
-
+  
   return (
     <div className="mainDiv">
       <LoginDialog isOpen={loginOpen} onLogin={handleLogin} />
@@ -124,7 +93,9 @@ const App: React.FC = () => {
           <div key="map" style={{display: 'flex', flexDirection: 'column'}}>
             <Header title="MAP EDITOR" />
             <Container >
-              <InteractiveMap rooms={rooms} />
+              <MapContext>
+                <InteractiveMap />
+              </MapContext>
             </Container>
             <Dropdown
               style={{ position: 'absolute', right: '3em', top: '4em' }}
