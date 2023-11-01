@@ -4,6 +4,7 @@ export interface ServerToClientEvents {
 
 export interface ClientToServerEvents {
   login: (username: string, password: string, callback: (msg: string) => void) => void;
+  get: (data: string, callback: (msg: string) => void) => void;
   hello: () => void;
 }
 

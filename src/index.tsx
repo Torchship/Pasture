@@ -4,6 +4,7 @@ import './index.css';
 import './variables.css';
 import App from './App';
 import { SocketProvider } from './SocketContext';
+import { SessionProvider } from './contexts/SessionContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -11,7 +12,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <SocketProvider>
-      <App />
+      <SessionProvider>
+        <App />
+      </SessionProvider>
     </SocketProvider>
   </React.StrictMode>,
 );
