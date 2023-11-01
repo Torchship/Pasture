@@ -1,0 +1,75 @@
+.tab-labels {
+  height: 1.2em;
+  width: 100%;
+  background-color: var(--primary-color);
+  clip-path: polygon(
+    0 0, 
+    calc(100% - 1em) 0, 
+    100% 80%, 
+    100% 100%, 
+    0 100%
+  );
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 1px;
+}
+
+.tab-labels .tab-label {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  max-width: 20%;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  margin-left: calc(-1em + 2px);
+  flex-grow: 5;
+  background-color: var(--dark-secondary-color);
+  height: calc(100% - 2px);
+  text-transform: uppercase;
+  clip-path: polygon(
+    0 0, 
+    calc(100% - 1em) 0%, 
+    100% 100%, 
+    calc(1em) 100%
+  )
+}
+
+.tab-labels > *:first-child {
+  margin-left: 0;
+  clip-path: polygon(
+    0 0, 
+    calc(100% - 1em) 0%, 
+    100% 100%, 
+    0 100%
+  );
+}
+
+.tab-labels > *:last-child {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 1em) 0,
+    100% calc(80% + 2px),
+    100% 100%,
+    1em 100%
+  );
+}
+
+.tab-labels .tab-label:hover {
+  background-color: var(--secondary-color);
+}
+
+.tab-label.selected {
+  background-color: var(--primary-color);
+  color: var(--dark-secondary-color);
+}
+
+.tab-content {
+  height: 100%;
+  padding: 1em 1em 1em 1em;
+  margin-top: -1px;
+  border: 2px solid var(--primary-color);
+  border-top: 0;
+}
