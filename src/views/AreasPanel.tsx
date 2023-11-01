@@ -1,6 +1,7 @@
 import React from 'react';
-import { Header } from '../components/Header';
-import Button from '../components/Button';
+import { Header } from '../elements/Header';
+import Button from '../elements/Button';
+import { Container } from '../elements/Container';
 
 const AreasPanel: React.FC = () => {
   const areas = ['Workers Quarter', 'Commercial Quarter', 'TEST Quarter', 'The Black Cat'];
@@ -8,10 +9,11 @@ const AreasPanel: React.FC = () => {
   return (
     <>
       <Header title="AREAS" />
-      <div style={{marginTop: '2em'}}></div>
-      {areas.map(area => (
-        <Button label={area}/>
-      ))}
+      <Container showBorder={false}>
+        {areas.map(area => (
+          <Button label={area}/>
+        ))}
+      </Container>
     </>
   );
 };

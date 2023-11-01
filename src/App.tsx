@@ -2,16 +2,18 @@ import React, { useState, useRef, useEffect } from 'react';
 import './App.css';
 import { useSocket } from './SocketContext';
 import { Responsive, WidthProvider } from 'react-grid-layout';
-import InteractiveMap from './components/Map/InteractiveMap';
-import { Header } from './components/Header';
-import { Container } from './components/Container';
-import Dropdown from './components/Dropdown';
+import InteractiveMap from './components/map/InteractiveMap';
+import { Header } from './elements/Header';
+import { Container } from './elements/Container';
+import Dropdown from './elements/Dropdown';
 import { Room } from './data/Map';
-import ModalDialog from './components/ModalDialog';
-import Table from './components/Table';
-import Button from './components/Button';
+import ModalDialog from './elements/ModalDialog';
+import Table from './elements/Table';
+import Button from './elements/Button';
 import AreasPanel from './views/AreasPanel';
 import PropertiesPanel from './views/PropertiesPanel';
+import TerminalPanel from './views/TerminalPanel';
+import LoginDialog from './components/dialogs/LoginDialog';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -19,6 +21,7 @@ const App: React.FC = () => {
   const socket = useSocket();
   const [containerHeight, setContainerHeight] = useState<number | null>(null);
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
+  const [loginOpen, setLoginOpen] = useState<boolean>(true);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -77,6 +80,7 @@ const App: React.FC = () => {
 
   return (
     <div className="mainDiv">
+      <LoginDialog isOpen={loginOpen} onClose={() => setLoginOpen(false)} />
       <ModalDialog isOpen={dialogOpen} onClose={() => setDialogOpen(false)} title="Test Modal Dialog">
         <Table>
           <tr>
@@ -96,8 +100,7 @@ const App: React.FC = () => {
           </tr>
         </Table>
       </ModalDialog>
-      <div ref={containerRef} style={{ height: '100vh', width: '100vw' }}>
-        <Header title="PASTURES" subtitle="VERSION 0.1" style={{marginBottom: '2em', marginTop: '1em'}}/>
+      <div ref={containerRef} style={{ paddingTop: '1vh', height: '98vh', width: '100vw' }}>
         <ResponsiveGridLayout
           draggableCancel=".noDrag"
           className="layout"
@@ -130,7 +133,7 @@ const App: React.FC = () => {
             <PropertiesPanel/>
           </div>
           <div key="terminal" style={{display: 'flex', flexDirection: 'column'}}>
-            <Header title="TERMINAL" />
+            <TerminalPanel/>
           </div>
           <div key="areas" style={{display: 'flex', flexDirection: 'column'}}>
             <AreasPanel />
