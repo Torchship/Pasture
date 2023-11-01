@@ -107,14 +107,16 @@ io.on("connection", (socket) => {
 
     socket.on('login', (username: string, password: string, callback: (msg: string) => void) => {
       sendCommand('login', {username: username, password: password}, callback);
-    })
+    });
 
     socket.on('get', (data: string, callback: (msg: string) => void) => {
       sendCommand(`GET_${data}`, {}, callback);
-    })
+      socket.emit('echo', `ECHO >> GET_${data}`);
+    });
 
-    socket.on('hello', () => {
-      console.log('client said hello');
+    socket.on('query', (data: string, params: any, callback: (msg: string) => void) => {
+      sendCommand(`QUERY_${data}`, params, callback);
+      socket.emit('echo', `ECHO >> QUERY_${data} ${JSON.stringify(params)}`);
     })
 });
 

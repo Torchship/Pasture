@@ -1,6 +1,6 @@
 export type Room = {
   name: string;
-  areas?: Area[];
+  areas: number[];
   id: number;
   exits?: Exit[];
 };
@@ -15,7 +15,7 @@ export type Area = {
   id: number;
   name: string;
   zone?: string;
-  rooms?: { [id: number]: Vector3 };
+  rooms: { [id: number]: Vector3 };
 };
 
 export type Exit = {

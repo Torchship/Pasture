@@ -1,4 +1,3 @@
-// RoomContext.tsx
 import React, { useState } from 'react';
 
 export type UserInfo = {

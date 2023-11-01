@@ -4,27 +4,49 @@ import TabContainer from '../elements/TabContainer';
 import Tab from '../elements/Tab';
 import MapContext from '../contexts/MapContext';
 import { useSocket } from '../SocketContext';
+import { ScrollableContainer } from '../elements/ScrollableContainer';
+import { Area } from '../data/Map';
 
-const AreasPanel: React.FC = () => {
-  const {areas, setAreas} = useContext(MapContext);
+export interface Props {
+  height?: number;
+  onAreaClick?: (area: Area) => void;
+}
+
+const AreasPanel: React.FC<Props> = ({height, onAreaClick}) => {
+  const {areas, setAreas, rooms, setRooms} = useContext(MapContext);
   const socket = useSocket();
 
   useEffect(() => {
     socket.emit('get', 'areas', (json => {
-      const newAreas = JSON.parse(json);
-      console.log('completed parsing');
-      console.log(newAreas);
-      setAreas(newAreas);
+      setAreas(JSON.parse(json));
     }));
-  });
+  }, []);
+
+  const handleAreaClick = (area: Area) => {
+    socket.emit('query', 'rooms', {area_id: area.id}, (json => {
+      const newRooms = JSON.parse(json);
+      // Create a copy of the current rooms state
+      const updatedRooms = {...rooms};
+
+      // Assign new values to the copy
+      for (let id in newRooms) {
+          updatedRooms[Number(id)] = newRooms[id];
+      }
+
+      setRooms(updatedRooms);
+      onAreaClick?.(area);
+    }))
+  }
 
   return (
     <>
       <TabContainer>
         <Tab label="Areas">
-          {areas.map(area => (
-            <Button key={area.id} label={area.name}/>
-          ))}
+          <ScrollableContainer maxHeight={height ? height * 0.8 : 200}>
+            {Object.entries(areas).map(([areaIdStr, area]) => (
+              <Button key={areaIdStr} label={area.name} onClick={() => handleAreaClick(area)}/>
+            ))}
+          </ScrollableContainer>
         </Tab>
         <Tab label="Zones">
         </Tab>

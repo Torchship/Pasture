@@ -4,7 +4,6 @@ import { useSocket } from './SocketContext';
 import LoginDialog from './components/dialogs/LoginDialog';
 import SessionContext from './contexts/SessionContext';
 import Dashboard from './views/Dashboard';
-// import MapContext from './contexts/MapContext';
 
 const App: React.FC = () => {
   const socket = useSocket();
@@ -21,13 +20,6 @@ const App: React.FC = () => {
       })
     });    
   };
-
-  // useEffect(() => {
-  //   socket.on('raw', (msg: string) => {
-  //     console.log(msg);
-  //     setMessages([...messages, msg]);
-  //   });
-  // }, [socket, messages]);
   
   return (
     <div className="mainDiv">

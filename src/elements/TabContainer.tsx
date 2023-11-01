@@ -7,7 +7,7 @@ interface Props {
 }
 
 const TabContainer: React.FC<Props> = ({children}) => {
-  const [selectedTab, setSelectedTab] = useState<string | undefined>(Array.isArray(children) ? (children[1].props as TabProps).label : (children?.props as TabProps).label);
+  const [selectedTab, setSelectedTab] = useState<string | undefined>(Array.isArray(children) ? (children[0].props as TabProps).label : (children?.props as TabProps).label);
 
   const handleTabClick = (tab: string | undefined) => {
     setSelectedTab(tab);
@@ -30,7 +30,11 @@ const TabContainer: React.FC<Props> = ({children}) => {
       }
       </div>
       <div className="tab-content">
-        {children}
+      {
+        Array.isArray(children) 
+          ? children.filter(c => (c.props as TabProps).label == selectedTab)
+          : children
+      }
       </div>
     </div>
   )

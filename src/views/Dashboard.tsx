@@ -2,16 +2,19 @@ import { useEffect, useRef, useState } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import { Header } from "../elements/Header";
 import { Container } from "../elements/Container";
-import Dropdown from "../elements/Dropdown";
 import PropertiesPanel from "./PropertiesPanel";
-// import TerminalPanel from "./TerminalPanel";
 import AreasPanel from "./AreasPanel";
+import TerminalPanel from "./TerminalPanel";
+import InteractiveMap from "../components/map/InteractiveMap";
+import { Area } from "../data/Map";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const Dashboard: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [selectedArea, setSelectedArea] = useState<Area | undefined>(undefined);
   const [containerHeight, setContainerHeight] = useState<number | null>(null);
+  const [messages, setMessages] = useState<string[]>([]);
 
   useEffect(() => {
     if (containerRef.current) {
@@ -42,25 +45,17 @@ const Dashboard: React.FC = () => {
           <div key="map" style={{display: 'flex', flexDirection: 'column'}}>
             <Header title="MAP EDITOR" />
             <Container >
-              {/* <MapContext>
-                <InteractiveMap />
-              </MapContext> */}
+                <InteractiveMap area={selectedArea}/>
             </Container>
-            <Dropdown
-              style={{ position: 'absolute', right: '3em', top: '4em' }}
-              label="Dropdown"
-              options={['Sample 1', 'Sample 2', 'Sample 3']}
-              onSelect={() => {}}
-            />
           </div>
           <div key="properties" style={{display: 'flex', flexDirection: 'column'}}>
             <PropertiesPanel/>
           </div>
           <div key="terminal" style={{display: 'flex', flexDirection: 'column'}}>
-            {/* <TerminalPanel messages={messages}/> */}
+            <TerminalPanel messages={messages} setMessages={setMessages}/>
           </div>
           <div key="areas" style={{display: 'flex', flexDirection: 'column'}}>
-            <AreasPanel />
+            <AreasPanel height={4 * height} onAreaClick={(area) => setSelectedArea(area)} />
           </div>
         </ResponsiveGridLayout>
       </div>

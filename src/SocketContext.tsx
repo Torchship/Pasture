@@ -10,7 +10,6 @@ interface SocketProviderProps {
 
 export const SocketProvider: React.FC<SocketProviderProps> = ({ children }) => {
   const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io('http://localhost:3001');
-  socket.emit('hello');
   return (
     <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>
   );
