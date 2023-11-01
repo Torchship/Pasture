@@ -44,7 +44,7 @@ const ModalDialog: React.FC<ModalProps> = ({
           <div className="modal-footer">
             {buttons.map(b => {
               return (
-                <Button label={b} onClick={() => handleButtonClick(b)}/>
+                <Button key={b} label={b} onClick={() => handleButtonClick(b)}/>
               )
             })}
           </div>

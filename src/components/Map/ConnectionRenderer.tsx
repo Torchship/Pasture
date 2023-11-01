@@ -30,6 +30,7 @@ const ConnectionRenderer: React.FC<ConnectionRendererProps> = ({ rooms, nodeSize
                             drawnConnections.add(connectionId);
                             return (
                                 <line
+                                    key={connectionId}
                                     x1={room.x * (nodeSize * 2) + (nodeSize / 2)}
                                     y1={(maxY - room.y) * (nodeSize * 2) + (nodeSize / 2)}
                                     x2={targetRoom.x * (nodeSize * 2) + (nodeSize / 2)}

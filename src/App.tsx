@@ -22,15 +22,19 @@ const App: React.FC = () => {
   const [containerHeight, setContainerHeight] = useState<number | null>(null);
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const [loginOpen, setLoginOpen] = useState<boolean>(true);
+  const [messages, setMessages] = useState<string[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const handleLogin = (username: string, password: string) => {
+    socket.emit(`connect ${username} ${password}`);
+    setLoginOpen(false);
+  };
 
   useEffect(() => {
     socket.on('message', (msg: string) => {
-      console.log('Message from server:', msg);
+      console.log(msg);
+      setMessages([...messages, msg]);
     });
-
-    // Send a message to the server when component mounts
-    socket.emit('message', 'Hello from React!');
 
     return () => {
       // cleanup listeners on unmount
@@ -80,7 +84,7 @@ const App: React.FC = () => {
 
   return (
     <div className="mainDiv">
-      <LoginDialog isOpen={loginOpen} onClose={() => setLoginOpen(false)} />
+      <LoginDialog isOpen={loginOpen} onLogin={handleLogin} />
       <ModalDialog isOpen={dialogOpen} onClose={() => setDialogOpen(false)} title="Test Modal Dialog">
         <Table>
           <tr>
@@ -133,7 +137,7 @@ const App: React.FC = () => {
             <PropertiesPanel/>
           </div>
           <div key="terminal" style={{display: 'flex', flexDirection: 'column'}}>
-            <TerminalPanel/>
+            <TerminalPanel messages={messages}/>
           </div>
           <div key="areas" style={{display: 'flex', flexDirection: 'column'}}>
             <AreasPanel />

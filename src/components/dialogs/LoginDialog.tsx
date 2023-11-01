@@ -17,8 +17,14 @@ const LoginDialog: React.FC<LoginDialogProps> = ({isOpen = false, onLogin, onClo
         }
     };
 
+    const handleButtonClick = (button: string) => {
+        if (button !== 'Login')
+          return;
+        handleLogin();
+    };
+
     return (
-        <ModalDialog style={{height: '20em', width: '25em'}} isOpen={isOpen} buttons={['Login']} title="Login" onClose={onClose}>
+        <ModalDialog style={{height: '20em', width: '25em'}} isOpen={isOpen} buttons={['Login']} title="Login" onClick={handleButtonClick}>
             <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '100%'}}>
                 <div style={{marginBottom: '2em'}}>
                     <label htmlFor="username" style={{marginRight: '1em'}}>Username:</label>

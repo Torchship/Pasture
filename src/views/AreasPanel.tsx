@@ -11,7 +11,7 @@ const AreasPanel: React.FC = () => {
       <Header title="AREAS" />
       <Container showBorder={false}>
         {areas.map(area => (
-          <Button label={area}/>
+          <Button key={area} label={area}/>
         ))}
       </Container>
     </>

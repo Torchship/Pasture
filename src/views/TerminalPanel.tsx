@@ -1,14 +1,13 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { Header } from '../elements/Header';
 import { Container } from '../elements/Container';
 import Terminal, { ColorMode, TerminalOutput } from '../elements/Terminal';
 
-const TerminalPanel: React.FC = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [terminalLineData, setTerminalLineData] = useState([
-    <TerminalOutput>Welcome to Pastures!</TerminalOutput>
-  ]);
+export interface Props {
+  messages?: string[];
+}
 
+const TerminalPanel: React.FC<Props> = ({messages}) => {
   return (
     <>
       <Header title="terminal" />
@@ -17,7 +16,9 @@ const TerminalPanel: React.FC = () => {
           colorMode={ ColorMode.Dark }  
           onInput={ terminalInput => console.log(`New terminal input received: '${ terminalInput }'`) }
           height='100%'>
-          { terminalLineData }
+            {
+              messages?.map(message => <TerminalOutput>{message}</TerminalOutput>)
+            }
         </Terminal>
       </Container>
     </>
