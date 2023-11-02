@@ -24,19 +24,26 @@ const AreasPanel: React.FC<Props> = ({height, onAreaClick, selectedArea}) => {
   }, [setAreas, socket]);
 
   const handleAreaClick = (area: Area) => {
-    socket.emit('query', 'rooms', {area_id: area.id}, (json => {
-      const newRooms = JSON.parse(json);
-      // Create a copy of the current rooms state
-      const updatedRooms = {...rooms};
+    socket.emit('query', 'area_rooms', {area_id: area.id}, (areaRoomsJson) => {
+      const updatedArea = {...area};
+      updatedArea.rooms = JSON.parse(areaRoomsJson);
+      const updatedAreas = {...areas};
+      updatedAreas[area.id] = updatedArea;
+      setAreas(updatedAreas);
+      socket.emit('query', 'rooms', {area_id: area.id}, (json => {
+        const newRooms = JSON.parse(json);
+        // Create a copy of the current rooms state
+        const updatedRooms = {...rooms};
 
-      // Assign new values to the copy
-      for (let id in newRooms) {
-          updatedRooms[Number(id)] = newRooms[id];
-      }
+        // Assign new values to the copy
+        for (let id in newRooms) {
+            updatedRooms[Number(id)] = newRooms[id];
+        }
 
-      setRooms(updatedRooms);
-      onAreaClick?.(area);
-    }))
+        setRooms(updatedRooms);
+        onAreaClick?.(area);
+      }));
+    });
   }
 
   return (
