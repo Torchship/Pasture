@@ -55,7 +55,6 @@ const InteractiveMap: React.FC<Props> = ({area}) => {
 
     const filteredRooms = Object.keys(area.rooms)
       .map(roomIdStr => rooms[Number(roomIdStr)]);
-    console.log(filteredRooms);
     return (
     <svg ref={svgRef} width="100%" height="100%" className="noDrag">
       <g>
