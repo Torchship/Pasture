@@ -12,7 +12,15 @@ type Props = {
 const InteractiveMap: React.FC<Props> = ({area}) => {
     const svgRef = useRef<SVGSVGElement | null>(null);
     const [selectedRoom, setSelectedRoom] = useState<Room>();
+    const [zLevel, setZLevel] = useState<number>(0);
     const {rooms} = useContext(MapContext);
+
+    useEffect(() => {
+      if (!area)
+        return;
+      const minZ = Math.min(...Object.values(rooms).map((room) => area.rooms[room.id].z));
+      setZLevel(minZ);
+    }, [area, rooms]);
 
     useEffect(() => {
         if (!svgRef.current) return;
@@ -51,8 +59,8 @@ const InteractiveMap: React.FC<Props> = ({area}) => {
     return (
     <svg ref={svgRef} width="100%" height="100%" className="noDrag">
       <g>
-        <ConnectionRenderer area={area} rooms={filteredRooms} nodeSize={100} z={0} />
-        <RoomRenderer area={area} rooms={filteredRooms} nodeSize={100} z={0} selected={selectedRoom} onRoomSelected={(r) => setSelectedRoom(r)}/>
+        <ConnectionRenderer area={area} rooms={filteredRooms} nodeSize={100} z={zLevel} />
+        <RoomRenderer area={area} rooms={filteredRooms} nodeSize={100} z={zLevel} selected={selectedRoom} onRoomSelected={(r) => setSelectedRoom(r)}/>
       </g>
     </svg>
   );

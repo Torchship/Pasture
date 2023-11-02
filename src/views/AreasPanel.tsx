@@ -50,6 +50,9 @@ const AreasPanel: React.FC<Props> = ({height, onAreaClick, selectedArea}) => {
           </ScrollableContainer>
         </Tab>
         <Tab label="Zones">
+          <ScrollableContainer maxHeight={height ? height * 0.8 : 200}>
+            
+          </ScrollableContainer>
         </Tab>
       </TabContainer>
     </>
