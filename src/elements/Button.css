@@ -17,3 +17,8 @@
     background-color: var(--light-secondary-color);
   }
 }
+
+.button.selected {
+  background-color: var(--primary-color);
+  color: var(--dark-secondary-color);
+}

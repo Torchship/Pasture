@@ -7,11 +7,12 @@ interface ButtonProps {
   children?: React.ReactNode;
   style?: React.CSSProperties;
   className?: string;
+  selected?: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({ label, onClick, children, style, className }) => {
+const Button: React.FC<ButtonProps> = ({ label, onClick, children, style, className, selected = false }) => {
   return (
-    <button onClick={onClick} className={`button noDrag ${className}`} style={style}>
+    <button onClick={onClick} className={`button noDrag ${selected ? 'selected' : ''} ${className}`} style={style}>
       {label || children}
     </button>
   );
