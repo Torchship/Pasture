@@ -10,9 +10,10 @@ import { Area } from '../data/Map';
 export interface Props {
   height?: number;
   onAreaClick?: (area: Area) => void;
+  selectedArea?: Area;
 }
 
-const AreasPanel: React.FC<Props> = ({height, onAreaClick}) => {
+const AreasPanel: React.FC<Props> = ({height, onAreaClick, selectedArea}) => {
   const {areas, setAreas, rooms, setRooms} = useContext(MapContext);
   const socket = useSocket();
 
@@ -20,7 +21,7 @@ const AreasPanel: React.FC<Props> = ({height, onAreaClick}) => {
     socket.emit('get', 'areas', (json => {
       setAreas(JSON.parse(json));
     }));
-  }, []);
+  }, [setAreas, socket]);
 
   const handleAreaClick = (area: Area) => {
     socket.emit('query', 'rooms', {area_id: area.id}, (json => {
@@ -44,7 +45,7 @@ const AreasPanel: React.FC<Props> = ({height, onAreaClick}) => {
         <Tab label="Areas">
           <ScrollableContainer maxHeight={height ? height * 0.8 : 200}>
             {Object.entries(areas).map(([areaIdStr, area]) => (
-              <Button key={areaIdStr} label={area.name} onClick={() => handleAreaClick(area)}/>
+              <Button key={areaIdStr} label={area.name} onClick={() => handleAreaClick(area)} selected={selectedArea === area}/>
             ))}
           </ScrollableContainer>
         </Tab>

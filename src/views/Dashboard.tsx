@@ -55,7 +55,7 @@ const Dashboard: React.FC = () => {
             <TerminalPanel messages={messages} setMessages={setMessages}/>
           </div>
           <div key="areas" style={{display: 'flex', flexDirection: 'column'}}>
-            <AreasPanel height={4 * height} onAreaClick={(area) => setSelectedArea(area)} />
+            <AreasPanel height={4 * height} onAreaClick={(area) => setSelectedArea(area)} selectedArea={selectedArea} />
           </div>
         </ResponsiveGridLayout>
       </div>
